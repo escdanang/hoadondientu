@@ -129,18 +129,14 @@ class CompanyController extends Controller
         }
     }
     public function indexPDF() {
-        set_time_limit(0);
-        $dompdf = new Dompdf();
-        $dompdf->set_option('defaultFont', 'Courier');
-        $companys= Company::all();
-    	$pdf = PDF::loadView('hoadon.hoadon01',  compact('companys'));
-    		return $pdf->download('company.pdf');
+    	$pdf = PDF::loadView(('hoadon.hoadon01'))->setOptions(['isFontSubsettingEnabled' => true,'dpi' => 100, 'defaultFont' => 'sans-serif','disable-smart-shrinking', true,'lowquality', false]);
+    		return $pdf->stream('company.pdf');
     }
     public function indexWord() {
     	$phpWord = new \PhpOffice\PhpWord\PhpWord();
         $view = view('company.company');
         $section = $phpWord->addSection($view);
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord,'Word2007');
         $objWriter->save('Appdividend.docx');
         return response()->download(public_path('Appdividend.docx'));
     }

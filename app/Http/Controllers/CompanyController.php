@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Company;
 use PDF;
+
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -128,14 +130,15 @@ class CompanyController extends Controller
     }
     public function indexPDF() {
         set_time_limit(0);
+        $dompdf = new Dompdf();
+        $dompdf->set_option('defaultFont', 'Courier');
         $companys= Company::all();
-    	$pdf = PDF::loadView('company.pdf',  compact('companys'));
+    	$pdf = PDF::loadView('hoadon.hoadon01',  compact('companys'));
     		return $pdf->download('company.pdf');
     }
     public function indexWord() {
-        $companys= Company::all();
     	$phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $view = view('company.company')->with(['Companys'=>$companys]);
+        $view = view('company.company');
         $section = $phpWord->addSection($view);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('Appdividend.docx');

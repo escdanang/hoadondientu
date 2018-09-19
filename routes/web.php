@@ -48,5 +48,3 @@ Route::group(['prefix'=>'admin'],function(){
                 Route::get('word','CompanyController@indexWord');
         });
 });
-Route::get('create','CompanyController@create');
-Route::post('store','CompanyController@store');

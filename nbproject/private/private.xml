@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/config/auth.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/config/dompdf.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/resources/views/hoadon/hoadon01.blade.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/bootstrap/app.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/resources/views/company/word.blade.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/app/Http/Controllers/CompanyController.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/resources/lang/vn/companys.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/config/app.php</file>
+            <file>file:/C:/Apache24/htdocs/Electronic_Bill/routes/web.php</file>
+        </group>
+    </open-files>
+</project-private>

@@ -129,7 +129,7 @@ class CompanyController extends Controller
         }
     }
     public function indexPDF() {
-    	$pdf = PDF::loadView(('hoadon.hoadon01'))->setOptions(['isFontSubsettingEnabled' => true,'dpi' => 100, 'defaultFont' => 'sans-serif','disable-smart-shrinking', true,'lowquality', false]);
+            $pdf = PDF::loadView(('hoadon.hoadon01'));
     		return $pdf->stream('company.pdf');
     }
     public function indexWord() {

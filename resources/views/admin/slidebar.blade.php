@@ -122,12 +122,16 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+        </li>
+        <li class="active treeview">
+          <a href="#">
+            <i class="fa fa-bar-chart text-blue"></i> <span>Đăng kí mẫu hóa đơn</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-bar-chart text-blue"></i> @Lang('slidebar.report')</a></li>
-            <li><a href="#"><i class="fa fa-building text-blue"></i> @Lang('slidebar.billstatement')</a></li>
-            <li><a href="#"><i class="fa fa-tags text-blue"></i>@Lang('slidebar.statisticsbilllist')</a></li>
-            
-          </ul>
+            <li><a href="#"><i class="fa fa-bar-chart text-blue"></i>Đăng kí sử dụng hóa đơn</a></li>
         </li>
 
       </ul>

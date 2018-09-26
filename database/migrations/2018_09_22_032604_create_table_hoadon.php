@@ -18,7 +18,8 @@ class CreateTableHoadon extends Migration
             $table->string('tax');
             $table->string('bills');
             $table->string('action');
-            $table->string('status');
+			$table->string('url');
+			$table->string('image');
             $table->timestamps();
         });
     }

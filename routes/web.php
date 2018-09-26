@@ -47,4 +47,7 @@ Route::group(['prefix'=>'admin'],function(){
                 Route::get('pdf','CompanyController@indexPDF');
                 Route::get('word','CompanyController@indexWord');
         });
+	Route::group(['prefix'=>'bills'],function(){
+		Route::get('add','billsController@add');
+        });
 });

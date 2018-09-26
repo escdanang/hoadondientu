@@ -129,9 +129,9 @@ class CompanyController extends Controller
         }
     }
     public function indexPDF() {
-      //       $pdf = PDF::loadView(('hoadon.hoadon01'));
-    		// return $pdf->stream('company.pdf');
-        return view('hoadon.hoadon01');
+        PDF::setOptions(['dpi' => 100, 'defaultFont' => 'sans-serif']);
+             $pdf = PDF::loadView(('hoadon.hoadon01'));
+    		 return $pdf->stream('company.pdf');
     }
     public function indexWord() {
     	$phpWord = new \PhpOffice\PhpWord\PhpWord();

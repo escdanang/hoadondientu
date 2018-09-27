@@ -53,15 +53,19 @@
           <tr role="row">
             <td style="text-align: center; width:15%;font-weight: normal;">{{$bill->tax}}</td>
             <td style=" text-align: center; width:20%; font-weight: normal;">{{$bill->bills}}</td>
-            <td style=" text-align: center; width:10% ; font-weight: normal;"><a href="{{$bill->url}}">
+             <td style=" text-align: center; width:10% ; font-weight: normal;">
+            @if($bill->image=="null")
+           <a href="{{$bill->url}}">
                 
                 <img alt="{{ $bill->url }}" src="{{asset('/bills/images/Icon_View_24.png')}}" style="cursor: zoom-in;" width="24px" hight="24px"/>
-              </a></td>
-              <td style=" text-align: center; width:10% ; font-weight: normal;"><a href="{asset('/bills/images/Icon_View_24.png')}}">
-                
+              </a>
+             @endif
+             @if($bill->url=="null")
                 <img alt="{{ $bill->url }}" src="{{asset('/bills/images/Icon_View_24.png')}}" style="cursor: zoom-in;" width="24px" hight="24px"/>
-              </a></td>
-              
+              </a>
+              @endif
+              <a href="#"  style="margin-left: 2%" delete_id="{{$bill->id}}" class="simpleConfirm"><i class="glyphicon glyphicon-trash"></i> @Lang('companys.deleted')</a>
+            </td>
        
           </tr>
               @endforeach
@@ -84,16 +88,12 @@
  $(document).on('click','.simpleConfirm', function(e){
   e.preventDefault();
       var id = $(this).attr('delete_id');
-       var value = $('#search').val();
       $.ajax({
             method:"get",
-            url:"{{route('products.removedata')}}",
-            data:{'id':id,
-            'search':value,
-          },
+            url:"{{route('bills.removedata')}}",
+            data:{'id':id},
             success:function(data)
             {
-              //$('#customer_table').DataTable().ajax.reload();
                $('#table_ajax').html(data);
             }
        })

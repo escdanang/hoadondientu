@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Bill;
+use File;
+use Illuminate\Http\Request;
+
 class billsController extends Controller
 {
     public function add()
@@ -26,6 +27,7 @@ class billsController extends Controller
         ]);
         $id_bill=Bill::max('id');
         $tax_bill=Bill::where('id',$id_bill)->first();
+        $url_bills=Bill::where('tax',$request->tax)->first();
         $bill= new Bill();
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -34,10 +36,10 @@ class billsController extends Controller
             $imagePath = $destinationPath. "/".  $name;
             $image->move($destinationPath, $name);
             $bill->image = $name;
-            $bill->url = "";
+            $bill->url = "null";
         }else{
-            $bill->image = "";
-            $bill->url = "";
+            $bill->image = "null";
+            $bill->url = $url_bills->url;
         }
         if((int)substr($tax_bill->tax,6)<=9){
             $arr=substr($tax_bill->tax,8)+1;
@@ -82,124 +84,133 @@ class billsController extends Controller
     }
     public function index7() {
     	return view('hoadon.hoadon07');
-    }public function index8() {
+    }
+    public function index8() {
     	return view('hoadon.hoadon08');
-    }public function index9() {
+    }
+    public function index9() {
     	return view('hoadon.hoadon09');
-    }public function index10() {
+    }
+    public function index10() {
     	return view('hoadon.hoadon10');
-    }public function index11() {
+    }
+    public function index11() {
     	return view('hoadon.hoadon11');
-    }public function index12() {
+    }
+    public function index12() {
     	return view('hoadon.hoadon12');
-    }public function index13() {
+    }
+    public function index13() {
     	return view('hoadon.hoadon13');
-    }public function index14() {
+    }
+    public function index14() {
     	return view('hoadon.hoadon14');
-    }public function index15() {
+    }
+    public function index15() {
     	return view('hoadon.hoadon15');
-    }public function index16() {
+    }
+    public function index16() {
     	return view('hoadon.hoadon16');
-    }public function index17() {
+    }
+    public function index17() {
     	return view('hoadon.hoadon17');
-    }public function index18() {
+    }
+    public function index18() {
     	return view('hoadon.hoadon18');
-    }public function index19() {
+    }
+    public function index19() {
     	return view('hoadon.hoadon19');
-    }public function index20() {
+    }
+    public function index20() {
     	return view('hoadon.hoadon20');
-    }public function index21() {
+    }
+    public function index21() {
     	return view('hoadon.hoadon21');
-    }public function index22() {
+    }
+    public function index22() {
     	return view('hoadon.hoadon22');
-    }public function index23() {
+    }
+    public function index23() {
     	return view('hoadon.hoadon23');
-    }public function index24() {
+    }
+    public function index24() {
     	return view('hoadon.hoadon24');
-    }public function index25() {
+    }
+    public function index25() {
     	return view('hoadon.hoadon25');
-    }public function index26() {
+    }
+    public function index26() {
     	return view('hoadon.hoadon26');
-    }public function index27() {
+    }
+    public function index27() {
     	return view('hoadon.hoadon27');
-    }public function index28() {
+    }
+    public function index28() {
     	return view('hoadon.hoadon28');
-    }public function index29() {
+    }
+    public function index29() {
     	return view('hoadon.hoadon29');
-    }public function index30() {
+    }
+    public function index30() {
     	return view('hoadon.hoadon30');
-    }public function index31() {
+    }
+    public function index31() {
     	return view('hoadon.hoadon31');
-    }public function index32() {
+    }
+    public function index32() {
     	return view('hoadon.hoadon32');
-    }public function index33() {
+    }
+    public function index33() {
     	return view('hoadon.hoadon33');
-    }public function index34() {
+    }
+    public function index34() {
     	return view('hoadon.hoadon34');
-    }public function index35() {
+    }
+    public function index35() {
     	return view('hoadon.hoadon35');
-    }public function index36() {
+    }
+    public function index36() {
     	return view('hoadon.hoadon36');
-    }public function index37() {
+    }
+    public function index37() {
     	return view('hoadon.hoadon37');
-    }public function index38() {
+    }
+    public function index38() {
     	return view('hoadon.hoadon38');
-    }public function index39() {
+    }
+    public function index39() {
     	return view('hoadon.hoadon39');
-    }public function index40() {
+    }
+    public function index40() {
     	return view('hoadon.hoadon40');
-    }public function index41() {
+    }
+    public function index41() {
     	return view('hoadon.hoadon41');
-    }public function index42() {
+    }
+    public function index42() {
     	return view('hoadon.hoadon42');
-    }public function index43() {
+    }
+    public function index43() {
     	return view('hoadon.hoadon43');
-    }public function index44() {
+    }
+    public function index44() {
     	return view('hoadon.hoadon44');
-    }public function index45() {
+    }
+    public function index45() {
     	return view('hoadon.hoadon45');
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public function destroy(Request $request)
+    {
+
+      $bill = Bill::find($request->id);
+      $bill->delete();
+      $destinationPath = public_path('/bills/images');
+      $imagePath = $destinationPath. "/".  $bill->image;
+      if(File::exists($imagePath)) {
+            File::delete($imagePath);
+      }
+      $bills= Bill::all();
+      $view = view('hoadon.ajaxBills')->with(['bills'=>$bills]);
+      return response($view);
+    }   
 }

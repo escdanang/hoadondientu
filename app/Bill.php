@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Bill extends Model
 {
     protected $table='bill';
     /**
@@ -13,7 +13,7 @@ class Products extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'tax', 'bills', 'action','status',
+        'id', 'tax', 'bills', 'action','url','image',
     ];
 
     public $timestamps = true;

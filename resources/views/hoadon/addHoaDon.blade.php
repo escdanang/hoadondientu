@@ -19,31 +19,17 @@
     $bills =[
         '01GTKT' =>  trans('bills.01GTKT'),
         '02GTKT' =>  trans('bills.02GTKT'),
-        '01GTKT' =>  123213213,
-        '01GTKT' =>  123213213,
-        '02GTKT' =>  123213213,
-        '02GTKT' => 123213213,
-        '02GTKT' =>  3213213,
-        '02GTKT' =>  123213213,
         ];
-    $tax =[
-        '01GTKT' =>  123213213,
-        '01GTKT' =>  123213213,
-        '02GTKT' =>  123213213,
-        '02GTKT' => 123213213,
-        '02GTKT' =>  3213213,
-        '02GTKT' =>  123213213,
-    ];
-    $url = '/admin/companys/save';
+    $url = '/admin/bills/save';
   }
   else {
   }
-  if(count($errors)>0) {
-    $bills = old('bills');
+  if(count($errors)>0) { 
+        $billls = old('bills');   
   }
 ?>
 
-{!! Form::open(array('url' => $url, 'class' => 'form-horizontal')) !!}
+{!! Form::open(array('url' => $url, 'files'=>true)) !!}
     {!! csrf_field() !!}
 <div class="box box-primary">
 <div class="box-header">
@@ -60,7 +46,7 @@
         <div class="col-sm-12">
           <div class="form-group" style="margin-right: 0px; margin-left: 0px">
             {!! Form::label('bills',trans('bills.bills'),['style'=>'font-weight:normal']) !!} </br>
-            {!! Form::select('bills',$bills,null,['class'=>'form-control','id'=>'bills']) !!}                    
+            {!! Form::select('bills',array_merge(array('' => 'Vui lòng chọn loại hóa đơn') + $bills),null,['class'=>'form-control','id'=>'bills']) !!}                    
             @if($errors->has('bills'))
             <p style="color: red">
                 {{$errors->first('bills')}}
@@ -70,18 +56,19 @@
         </div>
          <div class="col-sm-12">
           <div class="form-group" style="margin-right: 0px; margin-left: 0px">
-            
             {!! Form::label('taxs',trans('bills.tax'),['style'=>'font-weight:normal']) !!} </br>
             <div class="tax-box">
-                {!! Form::select('tax',$tax,null,['class'=>'form-control tax-bill','id'=>'bills111']) !!} 
+                {!! Form::select('tax',array_merge(array('' => 'Vụi lòng chọn mã hóa đơn') + $bill_tax),null,['class'=>'form-control tax-bill','id'=>'bills111']) !!} 
             </div>
-            @if($errors->has('tax'))
-            <p style="color: red">
-                {{$errors->first('bills')}}
-            </p>
-            @endif
           </div>
-        </div>       
+        </div>   
+        <div class="col-sm-12">
+            <div class="form-group" style="margin-right: 0px; margin-left: 0px">
+            
+            {!! Form::label('taxs',trans('bills.tax'),['style'=>'font-weight:normal']) !!} </br>
+             {!! Form::file('image', ['class'=>'btn-white form-control', 'placeholder'=>'Enter image Url']) !!}
+          </div>
+        </div>  
     </div>
     <div class="row">
         <div class="col-sm-12" align="right" >
@@ -97,25 +84,29 @@
 @section('script')
 <script>
         $("#bills").change(function () {
-            var arr = [];
             var bills = $(this).val();
-            var tax  = <?php echo json_encode($tax);?>;
-            console.log(tax);
+            if(bills==0){
+                $(".tax-bill").show();
+                $(".tax-bill-1").hide();
+            }else{
+                $(".tax-bill").hide();
+                $(".tax-bill-1").hide();
+            var arr = [];
+            var tax  = <?php echo json_encode($tax);?>;  
             $.each(tax, function(index, value){
-                alert(value);
-                if(bills == index){
+                if(bills == value.bills){
                     arr.push({ 
-                        ma: index, 
-                        name:  value 
+                        ma: value.bills, 
+                        name:  value.tax 
                 });
             }
             });
-            console.log(arr);
             $(".tax-bill").hide();
             $(".tax-box").append("<select class='form-control tax-bill-1' id='bills111' name='tax'></select>" );
             $.each(arr, function(index, value){   
-                $(".tax-bill-1").append('<option value="' + value.ma + '">' + value.name + '</option>');
-            });
-        }).keyup();
+                $(".tax-bill-1").append('<option value="' + value.name + '">' + value.name + '</option>');
+            })
+            }
+            }).keyup();
 </script>
 @endsection

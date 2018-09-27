@@ -32,7 +32,6 @@
     $url = '/admin/products/update/'.$products->id.'';
   }
   if(count($errors)>0) {
-    print_r(old('productcname'));
     $name = old('productcname');
     $code=old('productcode');
     $price = old('productcprice');
